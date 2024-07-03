@@ -11,16 +11,10 @@ public class ConstructorTest extends AbstractTest {
     public void init() {
         driver = DriverFactory.getDriver();
     }
-    @Test
-    @DisplayName("По умолчанию на главной странице открыта вкладка ингредиентов - Булки")
-    public void currentTabIsBuns() {
-        new HomePage(driver)
-                .goToURL()
-                .checkCurrentTabIsDisplayed(IngredientType.BUN);
-    }
+
     @Test
     @DisplayName("Клик по кнопке Соусы открывает вкладку Соусы")
-    public void openSaucesTab() {
+    public void openSaucesTab(){
         new HomePage(driver)
                 .goToURL()
                 .clickTab(IngredientType.SAUCE)
@@ -28,10 +22,23 @@ public class ConstructorTest extends AbstractTest {
     }
     @Test
     @DisplayName("Клик по кнопке Начинки открывает вкладку Начинки")
-    public void openFillingsTab() {
+    public void openFillingsTab(){
         new HomePage(driver)
                 .goToURL()
                 .clickTab(IngredientType.MAIN)
                 .checkCurrentTabIsDisplayed(IngredientType.MAIN);
+    }
+
+    @Test
+    @DisplayName("Клик по кнопке Булки открывает вкладку Булки")
+    public void openBunTab(){
+        new HomePage(driver)
+                .goToURL()
+                //переходим сначала на вкладку Соусы, т к вкладка Булки изначально не кликабельна
+                .clickTab(IngredientType.SAUCE)
+                .checkCurrentTabIsDisplayed(IngredientType.SAUCE)
+                //затем уже на вкладку Булки
+                .clickTab(IngredientType.BUN)
+                .checkCurrentTabIsDisplayed(IngredientType.BUN);
     }
 }

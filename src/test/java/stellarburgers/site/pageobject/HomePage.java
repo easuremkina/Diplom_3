@@ -77,7 +77,7 @@ public class HomePage extends AbstractPage {
     }
 
     @Step("Главная страница - Проверка текущей вкладки")
-    public void checkCurrentTabIsDisplayed(IngredientType ingredientType) {
+    public HomePage checkCurrentTabIsDisplayed(IngredientType ingredientType){
         By currentTab;
         if (ingredientType == IngredientType.BUN) {
             currentTab = bunsCurrentTab;
@@ -91,5 +91,6 @@ public class HomePage extends AbstractPage {
         new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT))
                 .until(ExpectedConditions.visibilityOfElementLocated(currentTab));
         assert driver.findElement(currentTab).isDisplayed();
+        return new HomePage(driver);
     }
 }
